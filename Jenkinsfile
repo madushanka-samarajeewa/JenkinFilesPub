@@ -11,6 +11,8 @@ pipeline
     stages{
         stage('Build'){
             steps{
+
+                echo 'Build App-before npm install'
                 sh 'npm install'
                 echo 'Build App'
                 
