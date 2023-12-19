@@ -21,13 +21,16 @@ pipeline
 
         stage('Test'){
             steps{
-                echo 'Test App'
+                echo 'Testing the App'
             }
         }
 
         stage('Deploy'){
             steps{
-                echo 'Deploy App'
+                echo 'select build'
+                sh 'cd /var/jenkins_home/workspace/jenkins-scm-test'
+                echo 'Deploying App to s3 bucket'
+                sh 'aws s3 sync build/ s3://firstbucketreactapp'
             }
         }
     }
