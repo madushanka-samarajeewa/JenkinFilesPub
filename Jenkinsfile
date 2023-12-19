@@ -37,8 +37,7 @@ pipeline
                 
                     echo $SECRET
                 }
-                echo \n
-
+               
                 withCredentials([string(credentialsId: 'awssecretaccess', variable: 'SECRET')]) { //set SECRET with the credential content
                     
                     echo $SECRET
