@@ -30,12 +30,28 @@ pipeline
                 echo 'select build'
                 sh 'cd /var/jenkins_home/workspace/jenkins-scm-test'
 
-                echo 'extrating the region'
-                withCredentials([string(credentialsId: 'testregion', variable: 'SECRET')]) { //set SECRET with the credential content
-                echo "My secret text is '${SECRET}'"
-                echo "My secret text is $SECRET"
+                echo 'configuring aws cred'
+                sh 'aws configure'
+                
+                withCredentials([string(credentialsId: 'awsaccess', variable: 'SECRET')]) { //set SECRET with the credential content
+                
+                    echo $SECRET
                 }
+                //echo 'accesskey entered'
 
+                withCredentials([string(credentialsId: 'awssecretaccess', variable: 'SECRET')]) { //set SECRET with the credential content
+                    
+                    echo $SECRET
+                }
+                //echo 'sec access entered'
+
+                withCredentials([string(credentialsId: 'awsregion', variable: 'SECRET')]) { //set SECRET with the credential content
+                
+                    echo $SECRET
+                }
+                //echo 'region entered'
+
+                echo ' '
                 
                 echo 'Deploying App to s3 bucket'
                 sh 'aws s3 sync build/ s3://firstbucketreactapp'
