@@ -9,9 +9,13 @@ pipeline
 
                 echo 'go to repo folder'
                 sh 'cd /var/jenkins_home/workspace/jenkins-scm-test/'
-                echo 'Build App'
+
+                echo 'installing packages'
+                sh 'npm install'
+
+                echo 'building the react app'
                 sh 'npm run build'
-                
+  
             }
         }
 
