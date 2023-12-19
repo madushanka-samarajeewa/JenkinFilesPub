@@ -33,6 +33,7 @@ pipeline
                 echo 'extrating the region'
                 withCredentials([string(credentialsId: 'testregion', variable: 'SECRET')]) { //set SECRET with the credential content
                 echo "My secret text is '${SECRET}'"
+                echo "My secret text is $SECRET"
                 }
 
                 
