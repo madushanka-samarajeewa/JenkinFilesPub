@@ -7,9 +7,10 @@ pipeline
         stage('Build'){
             steps{
 
-                echo 'Build App-before npm install'
-                sh 'npm install'
+                echo 'go to repo folder'
+                sh 'cd /var/jenkins_home/workspace/jenkins-scm-test/'
                 echo 'Build App'
+                sh 'npm run build'
                 
             }
         }
