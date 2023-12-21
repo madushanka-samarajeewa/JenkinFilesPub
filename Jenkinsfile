@@ -41,7 +41,7 @@ pipeline
                     export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
                     export AWS_DEFAULT_REGION=us-east-1
                     aws s3 ls
-                    sh 'aws s3 sync build/ s3://firstbucketreactapp'
+                    aws s3 sync build/ s3://firstbucketreactapp
                 """
                 
                 echo 'Deploying App to s3 bucket'
