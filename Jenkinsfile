@@ -2,6 +2,11 @@ pipeline
 {
     //agent
     agent any
+
+    environment{
+        ACCESS_KEY=credentials('awsaccess')
+        SECRET_ACC_KEY=credentials('awssecretaccess')
+    }
     
     stages{
         stage('Build'){
@@ -31,26 +36,12 @@ pipeline
                 sh 'cd /var/jenkins_home/workspace/jenkins-scm-test'
 
                 echo 'configuring aws cred'
-                sh 'aws configure'
-                
-                withCredentials([string(credentialsId: 'awsaccess', variable: 'SECRET')]) { //set SECRET with the credential content
-                
-                    echo $SECRET
-                }
-               
-                withCredentials([string(credentialsId: 'awssecretaccess', variable: 'SECRET')]) { //set SECRET with the credential content
-                    
-                    sh 'echo $SECRET'
-                }
-                //echo 'sec access entered'
-
-                withCredentials([string(credentialsId: 'awsregion', variable: 'SECRET')]) { //set SECRET with the credential content
-                
-                    echo $SECRET
-                }
-                //echo 'region entered'
-
-                echo ' '
+                sh """
+                    export AWS_ACCESS_KEY_ID=$ACCESS_KEY
+                    export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
+                    export AWS_DEFAULT_REGION=us-east-1
+                    aws s3 ls
+                """
                 
                 echo 'Deploying App to s3 bucket'
                 sh 'aws s3 sync build/ s3://firstbucketreactapp'
