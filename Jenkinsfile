@@ -7,14 +7,20 @@ pipeline
         ACCESS_KEY=credentials('awsaccess')
         SECRET_ACC_KEY=credentials('awssecretaccess')
     }
+
+    parameters {
+        string defaultValue: 'dev', description: 'selects which branch of the code should be built', name: 'Branch_Para'
+    }
     
     stages{
         stage('Build'){
             steps{
 
-                echo 'go to repo folder'
-                sh 'cd /var/jenkins_home/workspace/jenkins-scm-test/'
-                sh 'git checkout test-branch'
+                echo 'go to repo folder and select branch'
+                sh """
+                    cd /var/jenkins_home/workspace/jenkins-scm-test/
+                    git checkout $Branch_Para'
+                """
 
                 echo 'installing packages'
                 sh 'npm install'
