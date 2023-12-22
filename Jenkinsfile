@@ -14,6 +14,7 @@ pipeline
 
                 echo 'go to repo folder'
                 sh 'cd /var/jenkins_home/workspace/jenkins-scm-test/'
+                sh 'git checkout test-branch'
 
                 echo 'installing packages'
                 sh 'npm install'
