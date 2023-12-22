@@ -19,7 +19,7 @@ pipeline
                 echo 'go to repo folder and select branch'
                 sh """
                     cd /var/jenkins_home/workspace/jenkins-scm-test/
-                    git checkout $Branch_Para'
+                    git checkout $Branch_Para
                 """
 
                 echo 'installing packages'
