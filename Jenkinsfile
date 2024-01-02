@@ -31,9 +31,33 @@ pipeline
             }
         }
 
+        stage('Passing-AWS0-Credentials'){
+            steps{
+
+                 sh """
+                    export AWS_ACCESS_KEY_ID=$ACCESS_KEY
+                    export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
+                    export AWS_DEFAULT_REGION=us-east-1
+                    
+                """     
+                
+            }
+        }
+        
+
         stage('Test'){
             steps{
                 echo 'Testing the App'
+            }
+        }
+
+        stage('Artiface-Management'){
+            steps{
+                echo 'saving the artifact'
+
+                aws s3 ls s3://firstbucketreactapp
+
+
             }
         }
 
