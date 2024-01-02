@@ -67,7 +67,7 @@ pipeline
 
                     zip -r ${VERSION_NO}.zip build
 
-                    aws s3 sync ${VERSION_NO}.zip s3://version-mangement-reactapp
+                    aws s3 cp ${VERSION_NO}.zip s3://version-mangement-reactapp
 
                 """
 
