@@ -55,8 +55,9 @@ pipeline
             steps{
                 echo 'saving the artifact'
 
+                sh """
                 aws s3 ls s3://firstbucketreactapp
-
+                """
 
             }
         }
