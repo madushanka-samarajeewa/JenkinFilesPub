@@ -6,7 +6,7 @@ pipeline
     environment{
         ACCESS_KEY=credentials('awsaccess')
         SECRET_ACC_KEY=credentials('awssecretaccess')
-        VERSION_NO='1.1'
+        VERSION_NO='1.2'
     }
 
     parameters {
@@ -66,7 +66,9 @@ pipeline
                     cd /var/jenkins_home/workspace/jenkins-scm-test/
                     mv build $VERSION_NO
 
-                    aws s3 sync $VERSION_NO s3://firstbucketreactapp
+                    zip -r ${VERSION_NO}.zip build
+
+                    aws s3 sync ${VERSION_NO}.zip s3://version-mangement-reactapp
 
                 """
 
