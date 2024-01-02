@@ -6,6 +6,7 @@ pipeline
     environment{
         ACCESS_KEY=credentials('awsaccess')
         SECRET_ACC_KEY=credentials('awssecretaccess')
+        VERSION_NO='1.1'
     }
 
     parameters {
@@ -30,6 +31,7 @@ pipeline
   
             }
         }
+        /*
 
         stage('Passing-AWS0-Credentials'){
             steps{
@@ -44,6 +46,7 @@ pipeline
             }
         }
         
+        */
 
         stage('Test'){
             steps{
@@ -51,12 +54,20 @@ pipeline
             }
         }
 
-        stage('Artiface-Management'){
+        stage('Artifact-Management'){
             steps{
                 echo 'saving the artifact'
 
                 sh """
-                aws s3 ls s3://firstbucketreactapp
+                    export AWS_ACCESS_KEY_ID=$ACCESS_KEY
+                    export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
+                    export AWS_DEFAULT_REGION=us-east-1
+
+                    cd /var/jenkins_home/workspace/jenkins-scm-test/
+                    mv build $VERSION_NO
+
+                    aws s3 sync $VERSION_NO s3://firstbucketreactapp
+
                 """
 
             }
