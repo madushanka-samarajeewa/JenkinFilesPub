@@ -64,7 +64,6 @@ pipeline
                     export AWS_DEFAULT_REGION=us-east-1
 
                     cd /var/jenkins_home/workspace/jenkins-scm-test/
-                    mv build $VERSION_NO
 
                     zip -r ${VERSION_NO}.zip build
 
