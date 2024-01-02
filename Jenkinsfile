@@ -37,6 +37,7 @@ pipeline
             }
         }
 
+        /*
         stage('Deploy'){
             steps{
                 echo 'select build'
@@ -54,7 +55,9 @@ pipeline
                 """     
                 
             }
+            
         }
+        */
     }
     
 }
