@@ -75,7 +75,11 @@ pipeline
                 
 
                 */
-
+                sh """
+                    export AWS_ACCESS_KEY_ID=$ACCESS_KEY
+                    export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
+                    export AWS_DEFAULT_REGION=us-east-1
+                """
                 echo 'aquiring the latest version'
                 LATEST_VERSION = versioning()
                 echo "latest version $LATEST_VERSION"
