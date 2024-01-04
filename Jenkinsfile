@@ -55,6 +55,39 @@ pipeline
 
         stage('Artifact-Management'){
             steps{
+                /*
+                echo 'aquiring the latest version'
+
+                vArray=(0 6 10 2)
+                max_version=0
+                for tempVer in ${vArray[@]}; do
+                if [ $max_version -lt $tempVer ];
+                then
+                    max_version=$tempVer
+                fi
+                done
+                echo max version is : ${max_version}
+
+
+                */
+
+                echo 'aquiring the latest version'
+
+                sh """
+                    vArray=(`aws s3 ls s3://version-mangement-reactapp/ | awk '{print \$4}' | sort -V`)
+                    max_version=${vArray[-1]}
+                    max_version=${max_version%.zip}
+                    echo "max version is : ${max_version}"
+
+                    IFS='.' read -ra ADDR <<< "$max_version"
+                    ADDR[1]=$((ADDR[1]+1))
+                    new_version="${ADDR[0]}.${ADDR[1]}"
+                    echo "max version is : $new_version"
+
+                    VERSION_NO=$new_version
+
+                """
+
                 echo 'saving the artifact'
 
                 sh """
@@ -73,7 +106,7 @@ pipeline
             }
         }
 
-        
+        /*
         stage('Deploy'){
             steps{
                 echo 'select build'
@@ -100,6 +133,7 @@ pipeline
             }
             
         }
+        */
         
     }
     
