@@ -82,7 +82,7 @@ pipeline
                     export AWS_DEFAULT_REGION=us-east-1
                     
                     vArray=(`aws s3 ls s3://version-mangement-reactapp/ | awk '{print \$4}' | sort -V`)
-                    max_version=${vArray[-1]}
+                    max_version=/${vArray[-1]}
                     
                     max_version=$(basename "$max_version" .zip)
                     echo "max version is : ${max_version}"
