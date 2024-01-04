@@ -7,7 +7,12 @@ pipeline
         ACCESS_KEY=credentials('awsaccess')
         SECRET_ACC_KEY=credentials('awssecretaccess')
         VERSION_NO='1.2'
+
+        export AWS_ACCESS_KEY_ID=$ACCESS_KEY
+        export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
+        export AWS_DEFAULT_REGION=us-east-1
     }
+
 
     parameters {
         string defaultValue: 'dev', description: 'selects which branch of the code should be built', name: 'Branch_Para'
