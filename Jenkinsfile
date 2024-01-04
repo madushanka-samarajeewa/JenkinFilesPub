@@ -74,7 +74,7 @@ pipeline
                 */
 
                 echo 'aquiring the latest version'
-
+                /*
                 sh """
 
                     export AWS_ACCESS_KEY_ID=$ACCESS_KEY
@@ -94,6 +94,23 @@ pipeline
                     VERSION_NO=$new_version
 
                 """
+                */
+                script {
+
+                    def max_version = sh(script: "aws s3 ls s3://version-mangement-reactapp/ | awk '{print \$4}' | sort -V | tail -n1", returnStdout: true).trim()
+                    max_version = max_version.minus(".zip")
+                    echo "max version is : ${max_version}"
+
+                    def (major, minor) = max_version.tokenize('.')
+                    minor = minor.toInteger() + 1
+                    def new_version = "${major}.${minor}"
+                    echo "new version is : ${new_version}"
+
+                    VERSION_NO=${new_version}
+
+                }
+
+
 
                 echo 'saving the artifact'
 
