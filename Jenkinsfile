@@ -57,6 +57,9 @@ pipeline
 
         stage('Artifact-Management'){
             steps{
+                script{
+
+                
                 /*
                 echo 'aquiring the latest version'
 
@@ -137,7 +140,7 @@ pipeline
                     aws s3 cp ${VERSION_NO}.zip s3://version-mangement-reactapp
 
                 """
-
+                }
             }
         }
 
