@@ -8,9 +8,6 @@ pipeline
         SECRET_ACC_KEY=credentials('awssecretaccess')
         VERSION_NO='1.2'
 
-        export AWS_ACCESS_KEY_ID=$ACCESS_KEY
-        export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
-        export AWS_DEFAULT_REGION=us-east-1
     }
 
 
@@ -79,6 +76,11 @@ pipeline
                 echo 'aquiring the latest version'
 
                 sh """
+
+                    export AWS_ACCESS_KEY_ID=$ACCESS_KEY
+                    export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
+                    export AWS_DEFAULT_REGION=us-east-1
+                    
                     vArray=(`aws s3 ls s3://version-mangement-reactapp/ | awk '{print \$4}' | sort -V`)
                     max_version=${vArray[-1]}
                     max_version=${max_version%.zip}
