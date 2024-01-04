@@ -129,7 +129,7 @@ pipeline
                 }
                 */
 
-
+                /*
                 echo 'saving the artifact'
 
                 sh """
@@ -144,6 +144,7 @@ pipeline
                     aws s3 cp ${VERSION_NO}.zip s3://version-mangement-reactapp
 
                 """
+                */
                 }
             }
         }
