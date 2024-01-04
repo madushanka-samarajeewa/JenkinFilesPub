@@ -75,13 +75,11 @@ pipeline
                 
 
                 */
-                sh """
-                    export AWS_ACCESS_KEY_ID=$ACCESS_KEY
-                    export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
-                    export AWS_DEFAULT_REGION=us-east-1
-                """
+                
+                   
+                
                 echo 'aquiring the latest version'
-                LATEST_VERSION = versioning()
+                LATEST_VERSION = versioning(ACCESS_KEY, SECRET_ACC_KEY)
                 echo "latest version $LATEST_VERSION"
                 /*
                 sh '''
@@ -181,9 +179,13 @@ pipeline
     }
     
 }
-def versioning()
+def versioning(ACCESS_KEY,SECRET_ACC_KEY)
 {
     writeFile file:'test.sh', text: '''#!/bin/bash
+        export AWS_ACCESS_KEY_ID=$1
+        export AWS_SECRET_ACCESS_KEY=$2
+        export AWS_DEFAULT_REGION=us-east-1
+
         vArray=(`aws s3 ls s3://version-mangement-reactapp/ | awk '{print \$4}' | sort -V`)
         max_version=${vArray[-1]}
         max_version=${max_version%.zip}
