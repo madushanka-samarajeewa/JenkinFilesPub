@@ -97,6 +97,11 @@ pipeline
                 */
                 script {
 
+                    export AWS_ACCESS_KEY_ID=$ACCESS_KEY
+                    export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
+                    export AWS_DEFAULT_REGION=us-east-1
+                    
+
                     def max_version = sh(script: "aws s3 ls s3://version-mangement-reactapp/ | awk '{print \$4}' | sort -V | tail -n1", returnStdout: true).trim()
                     max_version = max_version.minus(".zip")
                     echo "max version is : ${max_version}"
