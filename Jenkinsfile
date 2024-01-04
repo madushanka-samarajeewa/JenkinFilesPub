@@ -79,7 +79,7 @@ pipeline
                    
                 
                 echo 'aquiring the latest version'
-                LATEST_VERSION = versioning($ACCESS_KEY, $SECRET_ACC_KEY)
+                LATEST_VERSION = versioning(ACCESS_KEY, SECRET_ACC_KEY)
                 echo "latest version $LATEST_VERSION"
                 /*
                 sh '''
@@ -199,7 +199,7 @@ def versioning(ACCESS_KEY,SECRET_ACC_KEY)
     '''
 
     new_version = sh (
-    script: "chmod +x test.sh && ./test.sh",
+    script: "chmod +x test.sh && ./test.sh ${ACCESS_KEY} ${SECRET_ACC_KEY}",
     returnStdout: true
     ).trim()
     sh "rm -f test.sh"
