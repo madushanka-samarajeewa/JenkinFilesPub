@@ -83,7 +83,7 @@ pipeline
                     
                     vArray=(`aws s3 ls s3://version-mangement-reactapp/ | awk '{print \$4}' | sort -V`)
                     max_version=${vArray[-1]}
-                    max_version='${max_version%\\.zip}'
+                    max_version=${max_version%\\.zip}
                     echo "max version is : ${max_version}"
 
                     IFS='.' read -ra ADDR <<< "$max_version"
