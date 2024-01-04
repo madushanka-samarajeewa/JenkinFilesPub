@@ -69,22 +69,22 @@ pipeline
                 fi
                 done
                 echo max version is : ${max_version}
-                max_version=${max_version%.zip}
+                
 
                 */
 
                 echo 'aquiring the latest version'
 
-                sh """
+                sh '''
 
                     export AWS_ACCESS_KEY_ID=$ACCESS_KEY
                     export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
                     export AWS_DEFAULT_REGION=us-east-1
                     
                     vArray=(`aws s3 ls s3://version-mangement-reactapp/ | awk '{print \$4}' | sort -V`)
-                    max_version=/${vArray[-1]}
-                    
-                    max_version=$(basename "$max_version" .zip)
+                    max_version=${vArray[-1]}
+                    max_version=${max_version%.zip}
+                   
                     echo "max version is : ${max_version}"
 
                     IFS='.' read -ra ADDR <<< "$max_version"
@@ -95,7 +95,7 @@ pipeline
                     VERSION_NO=$new_version
                     echo "new application version is : ${VERSION_NO}"
 
-                """
+                '''
                 /*
                 sh"""
                     export AWS_ACCESS_KEY_ID=$ACCESS_KEY
