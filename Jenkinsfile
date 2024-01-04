@@ -81,7 +81,7 @@ pipeline
                     export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
                     export AWS_DEFAULT_REGION=us-east-1
                     
-                    vArray=(`aws s3 ls s3://version-mangement-reactapp/ | awk '{print \$4}' | sort -V`)
+                    vArray=(`aws s3 ls s3://version-mangement-reactapp/ | awk '{print $4}' | sort -V`)
                     max_version=${vArray[-1]}
                     max_version=${max_version%.zip}
                    
