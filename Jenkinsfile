@@ -74,7 +74,9 @@ pipeline
                 */
 
                 echo 'aquiring the latest version'
-
+                LATEST_VERSION = versioning()
+                echo "latest version $LATEST_VERSION"
+                /*
                 sh '''
 
                     export AWS_ACCESS_KEY_ID=$ACCESS_KEY
@@ -96,6 +98,8 @@ pipeline
                     echo "new application version is : ${VERSION_NO}"
 
                 '''
+                */
+
                 /*
                 sh"""
                     export AWS_ACCESS_KEY_ID=$ACCESS_KEY
@@ -168,4 +172,25 @@ pipeline
         
     }
     
+}
+def versioning()
+{
+    writeFile file:'test.sh', text: '''#!/bin/bash
+        vArray=(`aws s3 ls s3://version-mangement-reactapp/ | awk '{print \$4}' | sort -V`)
+        max_version=${vArray[-1]}
+        max_version=${max_version%.zip}
+        echo "max version is : ${max_version}"
+
+        IFS='.' read -ra ADDR <<< "$max_version"
+        ADDR[1]=$((ADDR[1]+1))
+        new_version="${ADDR[0]}.${ADDR[1]}"
+        echo $new_version
+    '''
+
+    new_version = sh (
+    script: "chmod +x test.sh && ./test.sh",
+    returnStdout: true
+    ).trim()
+    sh "rm -f test.sh"
+    return new_version
 }
