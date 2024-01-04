@@ -19,7 +19,7 @@ pipeline
         stage('Build'){
             steps{
 
-                // echo 'go to repo folder and select branch'
+                echo 'go to repo folder and select branch'
                 // sh """
                 //     cd /var/jenkins_home/workspace/jenkins-scm-test/
                 //     git checkout $Branch_Para
