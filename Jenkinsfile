@@ -19,17 +19,17 @@ pipeline
         stage('Build'){
             steps{
 
-                echo 'go to repo folder and select branch'
-                sh """
-                    cd /var/jenkins_home/workspace/jenkins-scm-test/
-                    git checkout $Branch_Para
-                """
+                // echo 'go to repo folder and select branch'
+                // sh """
+                //     cd /var/jenkins_home/workspace/jenkins-scm-test/
+                //     git checkout $Branch_Para
+                // """
 
-                echo 'installing packages'
-                sh 'npm install'
+                // echo 'installing packages'
+                // sh 'npm install'
 
-                echo 'building the react app'
-                sh 'npm run build'
+                // echo 'building the react app'
+                // sh 'npm run build'
   
             }
         }
@@ -79,7 +79,7 @@ pipeline
                    
                 
                 echo 'aquiring the latest version'
-                LATEST_VERSION = versioning(ACCESS_KEY, SECRET_ACC_KEY)
+                LATEST_VERSION = versioning($ACCESS_KEY, $SECRET_ACC_KEY)
                 echo "latest version $LATEST_VERSION"
                 /*
                 sh '''
