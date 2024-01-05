@@ -50,9 +50,9 @@ pipeline
                 echo 'aquiring the latest version'
                 LATEST_VERSION = versioning(ACCESS_KEY, SECRET_ACC_KEY)
                 echo "latest version ${LATEST_VERSION}"
-                //VERSION_NO = LATEST_VERSION
+                VERSION_NO = $LATEST_VERSION
 
-                echo "latest version no ${LATEST_VERSION}"
+                echo "latest version no ${VERSION_NO}"
 
                 
                 // sh '''
@@ -101,10 +101,20 @@ pipeline
         stage('Deploy'){
             steps{
                 echo 'select build'
+                //cd /var/jenkins_home/workspace/jenkins-scm-test
+                 // mkdir tempDown
                 sh """ 
-                    cd /var/jenkins_home/workspace/jenkins-scm-test
-                    mkdir tempDown
-                    cd tempDown
+                
+                    directory="/var/jenkins_home/workspace/jenkins-scm-test/tempDown"
+                    if [ ! -d "$directory" ]; then
+                        mkdir -p "$directory"
+                        echo "Directory '$directory' created."
+                    else
+                    echo "Directory '$directory' already exists."
+                    fi
+
+                  
+                    cd /var/jenkins_home/workspace/jenkins-scm-test/tempDown
 
                     echo 'configuring aws cred'
                     export AWS_ACCESS_KEY_ID=$ACCESS_KEY
