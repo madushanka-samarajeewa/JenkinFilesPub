@@ -49,7 +49,7 @@ pipeline
                 echo 'aquiring the latest version'
                 LATEST_VERSION = versioning(ACCESS_KEY, SECRET_ACC_KEY)
                 echo "latest version $LATEST_VERSION"
-                VERSION_NO = LATEST_VERSION
+                //VERSION_NO = LATEST_VERSION
 
                 echo "latest version no $LATEST_VERSION"
 
@@ -139,12 +139,12 @@ def versioning(ACCESS_KEY,SECRET_ACC_KEY)
         vArray=(`aws s3 ls s3://version-mangement-reactapp/ | awk '{print \$4}' | sort -V`)
         max_version=${vArray[-1]}
         max_version=${max_version%.zip}
-        echo "max version is : ${max_version}"
+        #echo "max version is : ${max_version}"
 
         IFS='.' read -ra ADDR <<< "$max_version"
         ADDR[1]=$((ADDR[1]+1))
         new_version="${ADDR[0]}.${ADDR[1]}"
-        echo $new_version
+        #echo $new_version
     '''
 
     new_version = sh (
