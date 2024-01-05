@@ -106,8 +106,7 @@ pipeline
                 
                     cd /var/jenkins_home/workspace/jenkins-scm-test
                     mkdir -p tempDown
-                  
-                    cd /var/jenkins_home/workspace/jenkins-scm-test/tempDown
+                    cd tempDown
 
                     echo 'configuring aws cred'
                     export AWS_ACCESS_KEY_ID=$ACCESS_KEY
@@ -121,6 +120,8 @@ pipeline
 
                     echo 'Deploying App to s3 bucket'
                     aws s3 sync build/ s3://firstbucketreactapp 
+
+                    rmdir tempDown
                     
                 """    
                 
