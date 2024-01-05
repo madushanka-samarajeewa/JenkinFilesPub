@@ -132,7 +132,7 @@ pipeline
 def versioning(ACCESS_KEY,SECRET_ACC_KEY)
 {
     writeFile file:'test.sh', text: '''#!/bin/bash
-        echo "access key $1"
+        #echo "access key $1"
         export AWS_ACCESS_KEY_ID=$1
         export AWS_SECRET_ACCESS_KEY=$2
         export AWS_DEFAULT_REGION=us-east-1
