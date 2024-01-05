@@ -51,33 +51,30 @@ pipeline
                 echo "latest version $LATEST_VERSION"
                 VERSION_NO = $LATEST_VERSION
 
-                /*
-                sh '''
+                
+                // sh '''
 
-                    export AWS_ACCESS_KEY_ID=$ACCESS_KEY
-                    export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
-                    export AWS_DEFAULT_REGION=us-east-1
+                //     export AWS_ACCESS_KEY_ID=$ACCESS_KEY
+                //     export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
+                //     export AWS_DEFAULT_REGION=us-east-1
                     
-                    vArray=(`aws s3 ls s3://version-mangement-reactapp/ | awk '{print $4}' | sort -V`)
-                    max_version=${vArray[-1]}
-                    max_version=${max_version%.zip}
+                //     vArray=(`aws s3 ls s3://version-mangement-reactapp/ | awk '{print $4}' | sort -V`)
+                //     max_version=${vArray[-1]}
+                //     max_version=${max_version%.zip}
                    
-                    echo "max version is : ${max_version}"
+                //     echo "max version is : ${max_version}"
 
-                    IFS='.' read -ra ADDR <<< "$max_version"
-                    ADDR[1]=$((ADDR[1]+1))
-                    new_version="${ADDR[0]}.${ADDR[1]}"
-                    echo "max version is : $new_version"
+                //     IFS='.' read -ra ADDR <<< "$max_version"
+                //     ADDR[1]=$((ADDR[1]+1))
+                //     new_version="${ADDR[0]}.${ADDR[1]}"
+                //     echo "max version is : $new_version"
 
-                    VERSION_NO=$new_version
-                    echo "new application version is : ${VERSION_NO}"
+                //     VERSION_NO=$new_version
+                //     echo "new application version is : ${VERSION_NO}"
 
-                '''
-                */
-
-               
-
-                /*
+                // '''
+                
+                
                 echo 'saving the artifact'
 
                 sh """
@@ -92,12 +89,12 @@ pipeline
                     aws s3 cp ${VERSION_NO}.zip s3://version-mangement-reactapp
 
                 """
-                */
+                
                 }
             }
         }
 
-        /*
+        
         stage('Deploy'){
             steps{
                 echo 'select build'
@@ -124,7 +121,7 @@ pipeline
             }
             
         }
-        */
+        
         
     }
     
