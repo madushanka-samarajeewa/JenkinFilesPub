@@ -34,20 +34,6 @@ pipeline
             }
         }
         
-        /*
-        stage('Passing-AWS0-Credentials'){
-            steps{
-
-                 sh """
-                    export AWS_ACCESS_KEY_ID=$ACCESS_KEY
-                    export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
-                    export AWS_DEFAULT_REGION=us-east-1
-                    
-                """     
-                
-            }
-        }
-        */
 
         stage('Test'){
             steps{
@@ -60,28 +46,10 @@ pipeline
                 script{
 
                 
-                /*
-                echo 'aquiring the latest version'
-
-                vArray=(0 6 10 2)
-                max_version=0
-                for tempVer in ${vArray[@]}; do
-                if [ $max_version -lt $tempVer ];
-                then
-                    max_version=$tempVer
-                fi
-                done
-                echo max version is : ${max_version}
-                
-
-                */
-                
-                   
-                
                 echo 'aquiring the latest version'
                 LATEST_VERSION = versioning(ACCESS_KEY, SECRET_ACC_KEY)
                 echo "latest version $LATEST_VERSION"
-                VERSION_NO=$LATEST_VERSION
+                VERSION_NO = $LATEST_VERSION
 
                 /*
                 sh '''
@@ -107,27 +75,7 @@ pipeline
                 '''
                 */
 
-                /*
-                sh"""
-                    export AWS_ACCESS_KEY_ID=$ACCESS_KEY
-                    export AWS_SECRET_ACCESS_KEY=$SECRET_ACC_KEY
-                    export AWS_DEFAULT_REGION=us-east-1
-                """
-                script {
-
-                    def max_version = sh(script: "aws s3 ls s3://version-mangement-reactapp/ | awk '{print \$4}' | sort -V | tail -n1", returnStdout: true).trim()
-                    max_version = max_version.minus(".zip")
-                    echo "max version is : ${max_version}"
-
-                    def (major, minor) = max_version.tokenize('.')
-                    minor = minor.toInteger() + 1
-                    def new_version = "${major}.${minor}"
-                    echo "new version is : ${new_version}"
-
-                    VERSION_NO=${new_version}
-
-                }
-                */
+               
 
                 /*
                 echo 'saving the artifact'
