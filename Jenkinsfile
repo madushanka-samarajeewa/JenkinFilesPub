@@ -20,16 +20,17 @@ pipeline
             steps{
 
                 echo 'go to repo folder and select branch'
-                sh """
-                    cd /var/jenkins_home/workspace/jenkins-scm-test/
-                    git checkout $Branch_Para
-                """
 
-                echo 'installing packages'
-                sh 'npm install'
+                // sh """
+                //     cd /var/jenkins_home/workspace/jenkins-scm-test/
+                //     git checkout $Branch_Para
+                // """
 
-                echo 'building the react app'
-                sh 'npm run build'
+                // echo 'installing packages'
+                // sh 'npm install'
+
+                // echo 'building the react app'
+                // sh 'npm run build'
   
             }
         }
