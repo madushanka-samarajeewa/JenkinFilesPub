@@ -145,7 +145,7 @@ def versioning(ACCESS_KEY,SECRET_ACC_KEY)
         IFS='.' read -ra ADDR <<< "$max_version"
         ADDR[1]=$((ADDR[1]+1))
         new_version="${ADDR[0]}.${ADDR[1]}"
-        #echo $new_version
+        echo $new_version
     '''
 
     new_version = sh (
