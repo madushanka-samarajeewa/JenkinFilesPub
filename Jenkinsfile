@@ -49,7 +49,9 @@ pipeline
                 echo 'aquiring the latest version'
                 LATEST_VERSION = versioning(ACCESS_KEY, SECRET_ACC_KEY)
                 echo "latest version $LATEST_VERSION"
-                VERSION_NO = $LATEST_VERSION
+                VERSION_NO = LATEST_VERSION
+
+                echo "latest version no $LATEST_VERSION"
 
                 
                 // sh '''
