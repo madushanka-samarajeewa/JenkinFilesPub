@@ -101,18 +101,11 @@ pipeline
         stage('Deploy'){
             steps{
                 echo 'select build'
-                //cd /var/jenkins_home/workspace/jenkins-scm-test
-                 // mkdir tempDown
+                
                 sh """ 
                 
-                    directory="/var/jenkins_home/workspace/jenkins-scm-test/tempDown"
-                    if [ ! -d "$directory" ]; then
-                        mkdir -p "$directory"
-                        echo "Directory '$directory' created."
-                    else
-                    echo "Directory '$directory' already exists."
-                    fi
-
+                    cd /var/jenkins_home/workspace/jenkins-scm-test
+                    mkdir -p tempDown
                   
                     cd /var/jenkins_home/workspace/jenkins-scm-test/tempDown
 
