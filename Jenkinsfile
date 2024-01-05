@@ -91,6 +91,9 @@ pipeline
 
                     aws s3 cp ${VERSION_NO}.zip s3://version-mangement-reactapp
 
+                    rm ${VERSION_NO}.zip 
+                    rm -r build
+
                 """
                 
                 }
@@ -121,7 +124,8 @@ pipeline
                     echo 'Deploying App to s3 bucket'
                     aws s3 sync build/ s3://firstbucketreactapp 
 
-                    rmdir tempDown
+                    cd /var/jenkins_home/workspace/jenkins-scm-test
+                    rm -r tempDown
                     
                 """    
                 
